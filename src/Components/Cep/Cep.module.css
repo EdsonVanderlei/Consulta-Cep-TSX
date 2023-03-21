@@ -1,0 +1,147 @@
+
+:root{
+ --primary-color: rgb(170, 17, 170);
+ --primary-color-light: rgb(170, 60, 170);
+ --warning-color:rgb(156, 9, 9);
+}
+
+.Wrapper{
+    font-family:  monospace;
+    overflow: hidden;
+    min-height: 100vh;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SearchBox{
+    color: var(--primary-color-light);
+    border-bottom: 1px solid var(--primary-color);
+    min-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+}
+.InputWrapper{
+    border-radius: 20px;
+    box-shadow: 0px 10px 10px #00000041, 0px 10px 10px #00000056 ;
+    background-color: var(--white-color);
+    padding: 2rem;
+}
+
+.SearchBox input{
+    width: 100%;
+    border: none;
+    letter-spacing: 2px;
+    font-weight: bold;
+
+    font-size: 0.95rem;
+
+    background:none;
+}
+.SearchBox input:focus{
+    outline: none;
+}
+
+.CepTitle{
+ font-size: 1.5rem;
+}
+
+.CepTitle span{
+    background-color: var(--primary-color);
+    letter-spacing: 3px;
+    font-size: 1.5rem;
+    padding: 0.3rem 1.5rem;
+    border-radius: 3px;
+    color: var(--white-color) ;
+    font-weight: bold;
+}
+
+.TitleResult{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+.icon{
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.error{
+    text-align: center;
+    color: var(--warning-color);
+}
+.CepInformations p{
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: bolder;
+}
+.CepInformations span{
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* animate */
+
+  .loading{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .loading li {
+    display: inline-block;
+    list-style: none;
+    height: 8px;
+    width: 8px;
+    background: #0fa;
+    border-radius: 100%;
+    margin: 0 0.2em;
+    animation: anm 0.7s linear infinite alternate;
+  }
+  
+  @keyframes anm {
+    0% {
+      transform: scale(0.1);
+      filter: hue-rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(0.4);
+    }
+    100% {
+      transform: scale(1);
+      filter: hue-rotate(360deg);
+    }
+  }
+  
+  .loading li:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  
+  .loading li:nth-child(3) {
+    animation-delay: 0.8s;
+  }
+  
+  .CepInformations{
+   transition: 0.8s ease-in-out; 
+   animation: animaShow 1s;
+  }
+
+  @keyframes animaShow {
+        from{
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+  }
+
+  

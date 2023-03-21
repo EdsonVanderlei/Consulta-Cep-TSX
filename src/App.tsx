@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HttpService, schema, CEP } from './Classes/Http'
+import css from './App.module.css'
+import Cep from './Components/Cep/Cep';
+
+
 
 function App() {
+
+ 
+  
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={css.Wrapper}>
+      <div className={css.menu}>
+
+
+      </div>
+      <Cep />
     </div>
   );
 }
