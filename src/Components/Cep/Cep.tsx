@@ -8,7 +8,7 @@ import { MdGpsFixed } from 'react-icons/md'
 
 interface State {
     data: CEP | null,
-    error: boolean,
+    error: string | null,
     loading: boolean,
 }
 
@@ -19,7 +19,7 @@ const Cep = () => {
 
     const [state, setState] = React.useState<State>({
         data: null,
-        error: false,
+        error: null,
         loading: false
     });
     const [cep, setCep] = React.useState<string>('')
@@ -33,22 +33,23 @@ const Cep = () => {
         if (cep) {
             const Cep = cep.replace('-', '')
             if (Cep.length < 8 || null || undefined) {
-                setContent(<p className={css.error}>Digite Corretamente o Cep</p>)
+                setState((prev) => ({...prev, error: 'Digite um Cep Válido'}))
                 return;
             }
             if (Number(Cep)) {
-                setState({ loading: true, data: null, error: false })
-                const result = schema.safeParse(await HttpCep.get(`${Cep}/json/`));
+                setState({ loading: true, data: null, error: null })
+                const response = await HttpCep.get(`${Cep}/json/`)
+                const result = schema.safeParse(response);
                 if (result.success) {
                     setState((prev) => ({ ...prev, data: result.data, loading: false }))
                 }
                 else {
-                    setState((prev) => ({ ...prev, error: true, loading: false }))
+                    setState((prev) => ({ ...prev, error: 'Não foi encontrado esse cep', loading: false }))
                 }
             }
         }
         else {
-            setContent(<p className={css.error}>Digite Corretamente o Cep</p>)
+            setState((prev) => ({...prev, error: 'Digite um Cep Válido'}))
         }
     }
 
@@ -64,37 +65,7 @@ const Cep = () => {
     }, [cep])
 
 
-    React.useEffect(() => {
-        if (state.loading) {
-            setContent(<div className={css.loading}>
-                <li></li>
-                <li></li>
-                <li></li>
-            </div>)
-        }
-        else if (state.error) {
-            setContent(<p className={css.error}>Ocorreu um erro, tente novamente !</p>)
-        }
-        else {
 
-            if (state.data) {
-                const data = state.data
-
-                setContent(<div className={css.CepInformations}>
-                    <p>Bairro: <span>{data.bairro}</span></p>
-                    <p>Complemento: <span>{data.complemento}</span></p>
-                    <p>Cep: <span>{data.cep}</span></p>
-                    <p>Logradouro: <span>{data.logradouro}</span></p>
-                    <p>Localidade: <span>{data.localidade}</span></p>
-                    <p>UF: <span>{data.uf}</span></p>
-                    <p>DDD: <span>{data.ddd}</span></p>
-                </div>)
-            }
-
-
-        }
-
-    }, [state])
 
     return (
         <div className={css.Wrapper}>
@@ -106,7 +77,26 @@ const Cep = () => {
                 </div>
                 <div className={css.CepWrapper}>
                     <p className={css.TitleResult}>Dados do Cep <MdGpsFixed className={css.icon} />  </p>
-                    {Content}
+                    {state.loading && <div className={css.loading}>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </div>}
+                    {
+                        state.error && <p className={css.error}>{state.error}</p>
+                    }
+                    {
+                        state.data &&
+                        <div className={css.CepInformations}>
+                            <p>Bairro: <span>{state.data.bairro}</span></p>
+                            <p>Complemento: <span>{state.data.complemento}</span></p>
+                            <p>Cep: <span>{state.data.cep}</span></p>
+                            <p>Logradouro: <span>{state.data.logradouro}</span></p>
+                            <p>Localidade: <span>{state.data.localidade}</span></p>
+                            <p>UF: <span>{state.data.uf}</span></p>
+                            <p>DDD: <span>{state.data.ddd}</span></p>
+                        </div>
+                    }
                 </div>
 
 
