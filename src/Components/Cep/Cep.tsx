@@ -24,16 +24,17 @@ const Cep = () => {
     });
     const [cep, setCep] = React.useState<string>('')
     const [Content, setContent] = React.useState<JSX.Element | null>(null)
-    const HttpCep = new HttpService<CEP>('https://viacep.com.br/ws/', null);
 
 
 
 
-    async function getData() {
+    const getData = React.useCallback(async () => {
+        const HttpCep = new HttpService<CEP>('https://viacep.com.br/ws/', null);
+
         if (cep) {
             const Cep = cep.replace('-', '')
             if (Cep.length < 8 || null || undefined) {
-                setState((prev) => ({...prev, error: 'Digite um Cep Válido'}))
+                setState((prev) => ({ ...prev, error: 'Digite um Cep Válido' }))
                 return;
             }
             if (Number(Cep)) {
@@ -49,20 +50,23 @@ const Cep = () => {
             }
         }
         else {
-            setState((prev) => ({...prev, error: 'Digite um Cep Válido'}))
+            setState((prev) => ({ ...prev, error: 'Digite um Cep Válido' }))
         }
-    }
+    }, [ cep])
 
-    function handlePress(e: KeyboardEvent) {
-        if (e.keyCode === 13) {
-            getData()
-        }
-    }
+
+
+
 
     React.useEffect(() => {
+        function handlePress(e: KeyboardEvent) {
+            if (e.keyCode === 13) {
+                getData()
+            }
+        }
         window.addEventListener('keydown', handlePress, true);
         return () => window.removeEventListener('keydown', handlePress, true);
-    }, [cep])
+    }, [cep, getData])
 
 
 
@@ -88,17 +92,17 @@ const Cep = () => {
                     {
                         state.data &&
                         <>
-                        <div className={css.TitleResult}> Dados do Cep 🗺️</div>
+                            <div className={css.TitleResult}> Dados do Cep 🗺️</div>
 
-                        <div className={css.CepInformations}>
-                            <div><p>Bairro:</p> <span>{state.data.bairro}</span></div>
-                            <div><p>Complemento:</p> <span>{state.data.complemento}</span></div>
-                            <div><p>Cep:</p> <span>{state.data.cep}</span></div>
-                            <div><p>Logradouro:</p> <span>{state.data.logradouro}</span></div>
-                            <div><p>Localidade:</p> <span>{state.data.localidade}</span></div>
-                            <div><p>UF:</p> <span>{state.data.uf}</span></div>
-                            <div><p>DDD:</p> <span>{state.data.ddd}</span></div>
-                        </div>
+                            <div className={css.CepInformations}>
+                                <div><p>Bairro:</p> <span>{state.data.bairro}</span></div>
+                                <div><p>Complemento:</p> <span>{state.data.complemento}</span></div>
+                                <div><p>Cep:</p> <span>{state.data.cep}</span></div>
+                                <div><p>Logradouro:</p> <span>{state.data.logradouro}</span></div>
+                                <div><p>Localidade:</p> <span>{state.data.localidade}</span></div>
+                                <div><p>UF:</p> <span>{state.data.uf}</span></div>
+                                <div><p>DDD:</p> <span>{state.data.ddd}</span></div>
+                            </div>
                         </>
                     }
                 </div>
