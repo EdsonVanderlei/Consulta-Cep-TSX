@@ -55,9 +55,9 @@
   background-image: url('../../Assets/world.jfif');
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-background-clip: text;
+  background-clip: text;
   background-position: center center;
-  font-size: clamp(50px,10vw,200px);
+  font-size: clamp(50px,5vw,200px);
   text-align: center;
 }
 
