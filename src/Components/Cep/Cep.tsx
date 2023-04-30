@@ -69,33 +69,37 @@ const Cep = () => {
 
     return (
         <div className={css.Wrapper}>
+            <div className={css.CepTitle}>DESCUBRA O MUNDO</div>
             <div className={css.InputWrapper}>
-                <p className={css.CepTitle}>Digite o <span>Cep</span>: </p>
+                <p className={css.InputTitle}>Digite o Cep 👇</p>
                 <div className={css.SearchBox}>
                     <InputMask value={cep} onChange={({ target }) => setCep(target.value)} mask={'99999-999'} maskChar="" />
-                    <BiSearchAlt className={css.icon} onClick={getData} />
+                    <button className={css.btnSend} onClick={getData}>🌎</button>
                 </div>
                 <div className={css.CepWrapper}>
-                    <p className={css.TitleResult}>Dados do Cep <MdGpsFixed className={css.icon} />  </p>
                     {state.loading && <div className={css.loading}>
                         <li></li>
                         <li></li>
                         <li></li>
                     </div>}
                     {
-                        state.error && <p className={css.error}>{state.error}</p>
+                        state.error && <div className={css.error}>{state.error}</div>
                     }
                     {
                         state.data &&
+                        <>
+                        <div className={css.TitleResult}> Dados do Cep 🗺️</div>
+
                         <div className={css.CepInformations}>
-                            <p>Bairro: <span>{state.data.bairro}</span></p>
-                            <p>Complemento: <span>{state.data.complemento}</span></p>
-                            <p>Cep: <span>{state.data.cep}</span></p>
-                            <p>Logradouro: <span>{state.data.logradouro}</span></p>
-                            <p>Localidade: <span>{state.data.localidade}</span></p>
-                            <p>UF: <span>{state.data.uf}</span></p>
-                            <p>DDD: <span>{state.data.ddd}</span></p>
+                            <div><p>Bairro:</p> <span>{state.data.bairro}</span></div>
+                            <div><p>Complemento:</p> <span>{state.data.complemento}</span></div>
+                            <div><p>Cep:</p> <span>{state.data.cep}</span></div>
+                            <div><p>Logradouro:</p> <span>{state.data.logradouro}</span></div>
+                            <div><p>Localidade:</p> <span>{state.data.localidade}</span></div>
+                            <div><p>UF:</p> <span>{state.data.uf}</span></div>
+                            <div><p>DDD:</p> <span>{state.data.ddd}</span></div>
                         </div>
+                        </>
                     }
                 </div>
 

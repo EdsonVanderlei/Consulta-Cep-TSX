@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 
 :root{
- --primary-color: rgb(170, 17, 170);
- --primary-color-light: rgb(170, 60, 170);
+ --primary-color: rgb(26, 202, 188);
+ --primary-color-light: rgb(26, 135, 179);
+ --letter-color: #0b4715;
  --warning-color:rgb(156, 9, 9);
 }
 
@@ -11,21 +14,23 @@
     min-height: 100vh;
     background-color: var(--primary-color);
     display: flex;
+    gap: 2rem;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
 }
 
 .SearchBox{
     color: var(--primary-color-light);
     border-bottom: 1px solid var(--primary-color);
-    min-width: 400px;
     display: flex;
     justify-content: space-between;
     padding: 5px;
     align-items: center;
 }
 .InputWrapper{
-    border-radius: 20px;
+    margin:  0 30px;
+    border-radius: 5px;
     box-shadow: 0px 10px 10px #00000041, 0px 10px 10px #00000056 ;
     background-color: var(--white-color);
     padding: 2rem;
@@ -36,9 +41,7 @@
     border: none;
     letter-spacing: 2px;
     font-weight: bold;
-
     font-size: 0.95rem;
-
     background:none;
 }
 .SearchBox input:focus{
@@ -46,29 +49,40 @@
 }
 
 .CepTitle{
- font-size: 1.5rem;
+  padding: 10px;
+  color: transparent;
+  font-family: 'Bangers', cursive;
+  background-image: url('../../Assets/world.jfif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-position: center center;
+  font-size: clamp(50px,10vw,200px);
+  text-align: center;
 }
 
 .CepTitle span{
     background-color: var(--primary-color);
     letter-spacing: 3px;
-    font-size: 1.5rem;
     padding: 0.3rem 1.5rem;
     border-radius: 3px;
     color: var(--white-color) ;
     font-weight: bold;
 }
 
+.InputTitle{
+  font-size: 1.1rem;
+}
 .TitleResult{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background-color: var(--primary-color);
-    color: var(--white-color);
+    color: var(--letter-color);
     border-radius: 10px;
     padding: 10px;
-    font-size: 1.4rem;
+    font-weight: bold;
+    font-size: 1.05rem;
 }
 .icon{
     font-size: 1.4rem;
@@ -83,12 +97,20 @@
     font-size: 0.9rem;
     letter-spacing: 2px;
     font-weight: bolder;
+
+}
+
+
+
+.CepInformations div{
+  display: grid;
+  gap: 5px;
 }
 .CepInformations span{
     font-size: 0.8rem;
     letter-spacing: 1px;
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--letter-color);
 }
 
 /* animate */
@@ -135,6 +157,8 @@
   .CepInformations{
    transition: 0.8s ease-in-out; 
    animation: animaShow 1s;
+   display: grid;
+   gap: 10px;
   }
 
   @keyframes animaShow {
@@ -144,4 +168,9 @@
         }
   }
 
-  
+  .btnSend{
+    border: none;
+    font-size: 1.1rem;
+    background-color: transparent;
+    cursor: pointer;
+  }
